@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio - Mano</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #050d0e;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -10;
+      filter: brightness(0.3);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100%;
+      background-color: #061619;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 30px;
+      z-index: 100;
+      border-right: 1px solid rgba(0, 209, 255, 0.2);
+    }
+
+    .sidebar .brand {
+      font-size: 1.8rem;
+      color: #00f2ff;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #00d1ff88;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 20px;
+      width: 100%;
+      text-align: center;
+      transition: 0.3s;
+      border-radius: 8px;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #00f2ff;
+      color: #000;
+    }
+
+    .glow-bg {
+      position: fixed;
+      top: -30%;
+      left: -30%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #00f2ff33, transparent 70%);
+      animation: pulse 20s linear infinite;
+      z-index: -1;
+      filter: blur(100px);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .portfolio-section {
+      margin-left: 220px;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .portfolio-section h1 {
+      font-size: 3rem;
+      color: #00f2ff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px #00f2ff88;
+    }
+
+    .portfolio-section p {
+      color: #aaa;
+      max-width: 700px;
+      margin: auto;
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .portfolio-card {
+      background: #0c1819;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #00f2ff15;
+      transition: transform 0.5s ease, box-shadow 0.3s ease;
+      transform: translateY(40px);
+      opacity: 0;
+    }
+
+    .portfolio-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px #00f2ff55;
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .portfolio-card h3 {
+      font-size: 1.4rem;
+      margin: 10px 0 5px;
+    }
+
+    .portfolio-card p {
+      color: #ccc;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    .portfolio-card a {
+      display: inline-block;
+      padding: 10px 18px;
+      font-size: 1rem;
+      background: #00f2ff;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .portfolio-card a:hover {
+      background: #00d9e0;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+      }
+
+      .portfolio-section {
+        margin-left: 0;
+        padding-top: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="brand">Mano</div>
+    <nav>
+      <a href="Home.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="Services.html">Services</a>
+      <a href="Portfolio.html" class="active">Portfolio</a>
+      <a href="Contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Glowing Background -->
+  <div class="glow-bg"></div>
+
+  <!-- Background Video -->
+  <video autoplay muted loop class="video-bg">
+    <source src="bg-video6.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Portfolio Section -->
+  <section class="portfolio-section">
+    <h1>My Portfolio</h1>
+    <p>Here are some of the projects I've worked on recently. Each one showcases my skills and dedication to great design and functionality.</p>
+
+    <div class="portfolio-grid">
+      <!-- Repeat this card block for each project -->
+      <div class="portfolio-card">
+        <img src="port1.png" alt="Project 1" />
+        <h3>Personal Portfolio Website</h3>
+        <p>A sleek responsive site built with HTML, CSS, and JavaScript.</p>
+        <a href="port1.html">View Project</a>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="port2.png" alt="Project 2" />
+        <h3>E-commerce Store</h3>
+        <p>Online shop with payment gateway, product filters, and user login.</p>
+        <a href="port2.html">View Project</a>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="port3.png" alt="Project 3" />
+        <h3>Mobile UI App Design</h3>
+        <p>Modern mobile interface designed with user-centered design principles.</p>
+        <a href="port3.html">View Project</a>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="port4.png" alt="Project 4" />
+        <h3>Dashboard UI</h3>
+        <p>Admin dashboard for data visualization and team management.</p>
+        <a href="port4.html">View Project</a>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="port4.png" alt="Project 5" />
+        <h3>Network Security / Machine Learning</h3>
+        <p>Black Hole Attack Detection using KNN and reputation in MANETs.</p>
+        <a href="port4.html">View Project</a>
+      </div>
+
+      <div class="portfolio-card">
+        <img src="port4.png" alt="Project 6" />
+        <h3>Cloud Security & Cryptography</h3>
+        <p>Auditing scheme for secure storage in fog-to-cloud architecture.</p>
+        <a href="port4.html">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax Scroll Script -->
+  <script>
+    const cards = document.querySelectorAll('.portfolio-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>

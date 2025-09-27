@@ -1,0 +1,50 @@
+body {
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero {
+  padding: 80px 0;
+}
+
+.highlight {
+  color: #00D1FF;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  background-color: #00D1FF;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.profile-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #00D1FF;
+}
+
+.image-container, .about-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-icon {
+  color: #00D1FF;
+  font-size: 1.5rem;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  color: #fff;
+}
