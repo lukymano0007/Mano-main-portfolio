@@ -1,714 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mano portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mano Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
 
-  <style>
-    body {
-      background-color: #121212;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding-top: 80px;
-    }
-    .btn-shadow {
-  box-shadow: 0 0 10px rgba(0, 209, 255, 0.3);
-  background-color: #00D1FF;
-  border: none;
-  color: #000;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
+    <style>
+        /* === Embedded Styles (Kept here for specific animations and loader) === */
 
-.btn-shadow::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, #00f2ff 0%, transparent 70%);
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  z-index: -1;
-}
+        /* Battery Loader */
+        .battery-loader {
+            display: inline-block;
+            width: 24px;
+            height: 12px;
+            margin-right: 10px;
+            border: 2px solid #00D1FF;
+            border-radius: 2px;
+            position: relative;
+            box-sizing: border-box;
+            vertical-align: middle;
+            animation: borderGlow 1.5s infinite;
+        }
 
-.btn-shadow:hover::before {
-  transform: scale(1);
-  opacity: 1;
-}
+        .battery-loader::before {
+            content: "";
+            position: absolute;
+            right: -6px;
+            top: 2px;
+            width: 4px;
+            height: 8px;
+            background: #00D1FF;
+            border-radius: 1px;
+        }
 
-.btn-shadow:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #00D1FF, 0 0 30px #00D1FF66;
-  color: #000;
-}
+        .battery-fill {
+            height: 100%;
+            width: 30%;
+            background: #00D1FF;
+            animation: charge 1.2s infinite;
+        }
 
-.battery-loader {
-  display: inline-block;
-  width: 24px;
-  height: 12px;
-  margin-right: 10px;
-  border: 2px solid #00D1FF;
-  border-radius: 2px;
-  position: relative;
-  box-sizing: border-box;
-  vertical-align: middle;
-  animation: borderGlow 1.5s infinite;
-}
+        @keyframes charge {
+            0% { width: 0%; }
+            50% { width: 50%; }
+            100% { width: 30%; }
+        }
 
-.battery-loader::before {
-  content: "";
-  position: absolute;
-  right: -6px;
-  top: 2px;
-  width: 4px;
-  height: 8px;
-  background: #00D1FF;
-  border-radius: 1px;
-}
+        @keyframes borderGlow {
+            0%, 100% { box-shadow: 0 0 4px #00D1FF; }
+            50% { box-shadow: 0 0 12px #00D1FF; }
+        }
 
-.battery-fill {
-  height: 100%;
-  width: 30%;
-  background: #00D1FF;
-  animation: charge 1.2s infinite;
-}
+        /* Profile Image Animation */
+        @keyframes popIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
-@keyframes charge {
-  0% { width: 0%; }
-  50% { width: 50%; }
-  100% { width: 30%; }
-}
+        .profile-img.animate, .profile-img-a.animate {
+            animation: popIn 0.6s ease-out forwards;
+        }
 
-@keyframes borderGlow {
-  0%, 100% { box-shadow: 0 0 4px #00D1FF; }
-  50% { box-shadow: 0 0 12px #00D1FF; }
-}
+        /* Typing Cursor Animation */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
-    .highlight {
-      color: #00D1FF;
-    }
+        /* Certification Card Styling (Basic structure - assume 'style.css' provides theme) */
+        .certification-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%; /* Ensure equal height in the grid */
+        }
+        
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px #00D1FF; /* Glow effect on hover */
+        }
 
-    .cursor {
-      display: inline-block;
-      width: 3px;
-      background-color: #00D1FF;
-      animation: blink 0.7s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .profile-img, .profile-img-a {
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid #00D1FF;
-      opacity: 0;
-      transform: scale(0.5);
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.3); opacity: 0; }
-      60% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .profile-img.animate, .profile-img-a.animate {
-      animation: popIn 0.6s ease-out forwards;
-    }
-
-    .image-container, .about-image-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .social-icon {
-      color: #00D1FF;
-      font-size: 1.5rem;
-      margin-right: 15px;
-      transition: 0.3s;
-    }
-
-    .social-icon:hover {
-      color: #fff;
-    }
-
-    .btn-shadow {
-      box-shadow: 0 4px 15px rgba(0, 209, 255, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .btn-shadow:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 209, 255, 0.6);
-    }
-
-    #vanta-hero {
-      position: relative;
-      overflow: hidden;
-    }
-
-    #vanta-hero .container {
-      position: relative;
-      z-index: 2;
-    }
-
-    #vanta-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    /* Updated Navbar Styling */
-    .custom-navbar {
-      background: linear-gradient(120deg, rgba(0,209,255,0.15), rgba(0,255,255,0.05));
-      backdrop-filter: blur(8px);
-      transition: all 0.4s ease-in-out;
-      border-bottom: 1px solid rgba(0, 209, 255, 0.1);
-      z-index: 1030;
-    }
-
-    .navbar-brand.text-glow {
-      color: #00D1FF !important;
-      text-shadow: 0 0 10px #00d1ff88;
-      font-size: 1.6rem;
-      font-weight: bold;
-    }
-
-    .navbar-nav .nav-link {
-      color: #ffffff;
-      font-weight: 500;
-      position: relative;
-      padding: 10px 16px;
-      border-radius: 8px;
-      transition: 0.3s ease;
-    }
-
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active {
-      background: #00D1FF;
-      color: #000 !important;
-      box-shadow: 0 0 15px #00D1FF88;
-    }
-
-    .nav-button::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      transition: width 0.4s ease, height 0.4s ease;
-      z-index: 0;
-    }
-
-    .nav-button:active::after {
-      width: 300%;
-      height: 1200%;
-    }
-  </style>
+        .certification-card h4 {
+            color: #00D1FF;
+            margin-bottom: 5px;
+        }
+        
+        .certification-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: #ccc;
+        }
+        
+        .certification-card a {
+            color: #00D1FF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+    </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top custom-navbar shadow-sm">
-    <div class="container">
-      <a class="navbar-brand text-glow d-flex align-items-center" href="#">
-  <div class="battery-loader"><div class="battery-fill"></div></div>
-  Mano
-</a>
-      <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav gap-2">
-          <li class="nav-item"><a class="nav-link nav-button active" href="Home.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-button" href="About.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-button" href="Services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link nav-button" href="Portfolio.html">Portfolio</a></li>
-          <li class="nav-item"><a class="nav-link nav-button" href="Contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <div class="glow-bg"></div>
 
-  <!-- Hero Section -->
-  <section id="vanta-hero" class="hero d-flex align-items-center py-5" style="min-height: 100vh;">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6 text-center text-md-start">
-          <h1>Hello, It's Me</h1>
-          <h2 class="fw-bold">Manojkumar</h2>
-          <h3>And I'm a <span class="typed-text highlight"></span><span class="cursor">&nbsp;</span></h3>
-          <p>Welcome to my professional portfolio. I am a skilled web developer with a passion for creating exceptional user experiences.</p>
-          <div class="social-icons my-4">
-            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-          </div>
-          <a href="MY RESUME 1.pdf" download class="btn btn-primary btn-shadow">Download CV</a>
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-glow d-flex align-items-center" href="#hero-section">
+                <div class="battery-loader"><div class="battery-fill"></div></div>
+                Mano
+            </a>
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link nav-button active" href="#hero-section">Home</a></li>
+                    <li class="nav-item"><a class="nav-link nav-button" href="#about-me">About</a></li>
+                    <li class="nav-item"><a class="nav-link nav-button" href="#services-section">Services</a></li>
+                    <li class="nav-item"><a class="nav-link nav-button" href="#portfolio-section">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link nav-button" href="#skills-section">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link nav-button" href="#certifications-section">Certifications</a></li> <li class="nav-item"><a class="nav-link nav-button" href="#contact-section">Contact</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-6 text-center">
-          <div class="image-container">
-            <img src="fghjfg (2).png" alt="Profile Picture" class="profile-img">
-          </div>
+    </nav>
+
+    <section id="hero-section" class="hero d-flex align-items-center py-5" style="min-height: 100vh;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <h1>Hello, It's Me</h1>
+                    <h2 class="fw-bold">Manojkumar</h2>
+                    <h3>And I'm a <span class="typed-text highlight"></span><span class="cursor">&nbsp;</span></h3>
+                    <p>Welcome to my professional portfolio. I am a skilled web developer with a passion for creating exceptional user experiences.</p>
+                    <div class="social-icons my-4">
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    </div>
+                    <a href="MY RESUME 1.pdf" download class="btn btn-primary btn-shadow">Download CV</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="image-container">
+                        <img src="fghjfg (2).png" alt="Profile Picture" class="profile-img">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About -->
-  <section class="about-me d-flex align-items-center py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6 text-center">
-          <div class="about-image-container">
-            <img src="about.icon.png" alt="Profile Picture" class="profile-img-a">
-          </div>
+    <section id="about-me" class="about-me d-flex align-items-center py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center">
+                    <div class="about-image-container">
+                        <img src="fghjfg (2).png" alt="Profile Picture" class="profile-img-a">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>About <span class="highlight">Me</span></h2>
+                    <h3>HELLO!!</h3>
+                    <p>I am a dedicated frontend developer with a focus on creating visually appealing and user-friendly websites. My expertise includes HTML, CSS, and JavaScript, and I'm passionate about staying updated on the latest web development trends.</p>
+                    <a href="About.html" class="btn btn-primary btn-shadow">Read More</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-          <h2>About <span class="highlight">Me</span></h2>
-          <h3>HELLO!!</h3>
-          <p>I am a dedicated frontend developer with a focus on creating visually appealing and user-friendly websites. My expertise includes HTML, CSS, and JavaScript, and I'm passionate about staying updated on the latest web development trends.</p>
-          <a href="#" class="btn btn-primary btn-shadow">Read More</a>
+    </section>
+
+    <section id="services-section" class="services-section">
+        <div class="container text-center py-5">
+            <h1>My Services</h1>
+            <p>I offer a range of creative and technical services to bring your ideas to life.</p>
+        
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Building modern, responsive websites using HTML, CSS, JavaScript, and frameworks.</p>
+                    <a href="projects/web-development.html" class="learn-more-btn" target="_blank">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>Crafting intuitive user interfaces with focus on usability and aesthetics.</p>
+                    <a href="Course-app.pdf" class="learn-more-btn" target="_blank">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile App Design</h3>
+                    <p>Designing sleek and functional app interfaces for iOS and Android platforms.</p>
+                    <a href="banking-app.pdf" class="learn-more-btn" target="_blank">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-search"></i>
+                    <h3>SEO Optimization</h3>
+                    <p>Improving website visibility and search engine rankings with modern strategies.</p>
+                    <a href="projects/seo-optimization.html" class="learn-more-btn" target="_blank">Learn More</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Services -->
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mano Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <section id="portfolio-section" class="portfolio-section py-5">
+        <div class="container text-center">
+            <h2>Portfolio</h2>
+            <p>Some of my recent works.</p>
+            <div class="portfolio-toggle text-center mb-4">
+                <button class="btn btn-shadow active btn-primary" data-topic="web">Web Projects</button>
+                <button class="btn btn-shadow btn-outline-primary" data-topic="app">App Projects</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-topic" id="web">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="port1.png" class="card-img-top" alt="Personal Portfolio Website"><div class="card-body"><h5 class="card-title">Personal Portfolio Website</h5><p class="card-text">Description of project 1.</p></div></div></div>
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="port2.png" class="card-img-top" alt=" E-commerce Store"><div class="card-body"><h5 class="card-title">E-commerce Store</h5><p class="card-text">Description of project 2.</p></div></div></div>
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="port3.png" class="card-img-top" alt="Dashboard UI"><div class="card-body"><h5 class="card-title">Dashboard UI</h5><p class="card-text">Description of project 3.</p></div></div></div>
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="port4.png" class="card-img-top" alt="Mobile UI App Design"><div class="card-body"><h5 class="card-title">Mobile UI App Design</h5><p class="card-text">Description of project 4.</p></div></div></div>
+                    </div>
+                </div>
+                <div class="portfolio-topic d-none" id="app">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="app1 (1).jpeg" class="card-img-top" alt="App Project 1"><div class="card-body"><h5 class="card-title">banking-app</h5><p class="card-text">Description of app 1.</p></div></div></div>
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="app1 (4).jpeg" class="card-img-top" alt="App Project 2"><div class="card-body"><h5 class="card-title">Hostelpay-app</h5><p class="card-text">Description of app 2.</p></div></div></div>
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="app1 (3).jpeg" class="card-img-top" alt="App Project 3"><div class="card-body"><h5 class="card-title">Clothes Shop-app</h5><p class="card-text">Description of app 3.</p></div></div></div>
+                        <div class="col-md-3"><div class="card portfolio-card"><img src="app1 (2).jpeg" class="card-img-top" alt="App Project 4"><div class="card-body"><h5 class="card-title">Course learning-app</h5><p class="card-text">Description of app 4.</p></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #050d0e;
-      color: #ffffff;
-      overflow-x: hidden;
-    }
+    <section id="latest-projects" class="projects-section py-5">
+        <div class="container text-center">
+            <h2 class="section-title">Latest <span class="highlight">Projects</span></h2>
+            <div class="projects-grid row row-cols-1 row-cols-md-3 g-4 mt-4">
+                <div class="col">
+                    <div class="project-card position-relative overflow-hidden shadow-sm rounded">
+                        <img src="latest1 (3).jpeg" class="img-fluid" alt="Project 1">
+                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white bg-dark bg-opacity-50 opacity-0 transition">
+                            <h3>Design</h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                            <a href="#" class="view-btn btn btn-outline-light">&#128279;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="project-card position-relative overflow-hidden shadow-sm rounded">
+                        <img src="latest1 (2).jpeg" class="img-fluid" alt="Project 2">
+                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white bg-dark bg-opacity-50 opacity-0 transition">
+                            <h3>App Development</h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                            <a href="#" class="view-btn btn btn-outline-light">&#128279;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="project-card position-relative overflow-hidden shadow-sm rounded">
+                        <img src="latest1 (1).jpeg" class="img-fluid" alt="Project 3">
+                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white bg-dark bg-opacity-50 opacity-0 transition">
+                            <h3>UI/UX Design</h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                            <a href="#" class="view-btn btn btn-outline-light">&#128279;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    .glow-bg {
-      position: fixed;
-      top: -30%;
-      left: -30%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, #00f2ff33, transparent 70%);
-      animation: pulse 20s linear infinite;
-      z-index: -1;
-      filter: blur(100px);
-    }
+    <section id="skills-section" class="skills-section py-5">
+        <div class="container text-center">
+            <h2>Skills & <span class="highlight">Tools</span></h2>
+            <p>I develop simple, intuitive, and responsive user interfaces using these technologies.</p>
+            <div class="toggle-buttons mb-4">
+                <button id="skills-btn" class="active btn btn-primary btn-shadow">Skills</button>
+                <button id="tools-btn" class="btn btn-outline-primary btn-shadow">Tools</button>
+            </div>
+            <div id="skills-content" class="skills-icons d-flex flex-wrap justify-content-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+            </div>
+            <div id="tools-content" class="skills-icons d-none flex-wrap justify-content-center gap-3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="NPM">
+            </div>
+        </div>
+    </section>
+    
+    <section id="certifications-section" class="certifications-section py-5">
+        <div class="container text-center">
+            <h2>My <span class="highlight">Certifications</span></h2>
+            <p>Validated expertise in key development areas.</p>
+            <div class="row g-4 mt-4 justify-content-center">
+                
+                <div class="col-md-4">
+                    <div class="certification-card shadow-lg">
+                        <h4>Full-Stack Web Development</h4>
+                        <p class="mb-2"><strong>Issued by:</strong> Coursera</p>
+                        <p class="mb-2"><strong>Completion Date:</strong> July 2024</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer">View Certificate &rarr;</a>
+                    </div>
+                </div>
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 1; }
-    }
+                <div class="col-md-4">
+                    <div class="certification-card shadow-lg">
+                        <h4>Advanced JavaScript Mastery</h4>
+                        <p class="mb-2"><strong>Issued by:</strong> Udemy</p>
+                        <p class="mb-2"><strong>Completion Date:</strong> May 2024</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer">View Certificate &rarr;</a>
+                    </div>
+                </div>
 
-    .services-section {
-      margin-left: 220px;
-      padding: 80px 20px;
-      text-align: center;
-    }
+                <div class="col-md-4">
+                    <div class="certification-card shadow-lg">
+                        <h4>Responsive Design Principles</h4>
+                        <p class="mb-2"><strong>Issued by:</strong> freeCodeCamp</p>
+                        <p class="mb-2"><strong>Completion Date:</strong> March 2024</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer">View Certificate &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact-section" class="contact-section d-flex justify-content-center align-items-center py-5">
+        <div class="container text-center">
+            <h1 class="mb-5">Get in <span class="highlight">Touch</span></h1>
+            
+            <div class="box mx-auto">
+                <div class="contact"> 
+                    <div class="contactBx">
+                        <h2>
+                            <i class="fa-solid fa-envelope"></i> 
+                            Contact Me
+                            <i class="fa-solid fa-phone"></i>
+                        </h2>
+                        
+                        <form action="mailto:youremail@example.com" method="post" enctype="text/plain" class="w-100">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
 
-    .services-section h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #00f2ff;
-      text-shadow: 0 0 15px #00f2ff88;
-    }
+                        <div class="social-links mt-4">
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    .services-section p {
-      color: #aaa;
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto 50px;
-    }
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-    .services-grid {
-      display: grid;
-      gap: 30px;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      max-width: 1100px;
-      margin: auto;
-    }
+    <script>
+        // === Typing Animation ===
+        const typedTextSpan = document.querySelector(".typed-text");
+        const cursorSpan = document.querySelector(".cursor");
+        const textArray = ["Software Developer", " Designer", "Creative Thinker"];
+        const typingDelay = 100;
+        const erasingDelay = 50;
+        const newTextDelay = 1500;
+        let textArrayIndex = 0;
+        let charIndex = 0;
 
-    .service-card {
-      background: #0c1819;
-      padding: 30px;
-      border-radius: 16px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      box-shadow: 0 0 20px #00f2ff15;
-    }
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                cursorSpan.classList.remove("typing");
+                setTimeout(erase, newTextDelay);
+            }
+        }
 
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 30px #00f2ff55;
-    }
+        function erase() {
+            if (charIndex > 0) {
+                if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } else {
+                cursorSpan.classList.remove("typing");
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, typingDelay + 500);
+            }
+        }
 
-    .service-card i {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      color: #00f2ff;
-    }
+        // === Document Ready & Animations/Functionality ===
+        document.addEventListener("DOMContentLoaded", function () {
+            if (textArray.length) setTimeout(type, newTextDelay + 250);
+            
+            // Initial animation for profile images
+            document.querySelector(".profile-img")?.classList.add("animate");
+            document.querySelector(".profile-img-a")?.classList.add("animate");
 
-    .service-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
+            // Scrollspy/Active Nav Link setup (basic logic)
+            const navLinks = document.querySelectorAll('.nav-link.nav-button');
+            // Added the new section ID here
+            const sections = document.querySelectorAll('section'); 
 
-    .service-card p {
-      color: #ccc;
-      font-size: 1rem;
-    }
+            window.addEventListener('scroll', () => {
+                let current = 'hero-section';
+                // Adjust offset (e.g., 90px for the navbar height)
+                const offset = 90; 
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - offset; 
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
 
-    .learn-more-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      font-size: 1rem;
-      background: #00f2ff;
-      color: #000;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href')?.includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
 
-    .learn-more-btn:hover {
-      background: #01d8e2;
-      transform: scale(1.05);
-    }
 
-    .learn-more-btn::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      transition: width 0.5s ease, height 0.5s ease;
-    }
+            // === Portfolio Toggle Logic ===
+            const portfolioButtons = document.querySelectorAll('.portfolio-toggle .btn');
+            const portfolioTopics = document.querySelectorAll('.portfolio-topic');
 
-    .learn-more-btn:active::after {
-      width: 300%;
-      height: 800%;
-    }
+            portfolioButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTopic = this.getAttribute('data-topic');
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 0;
-        border-right: none;
-        border-bottom: 1px solid rgba(0, 209, 255, 0.2);
-      }
+                    // Update button styles
+                    portfolioButtons.forEach(btn => {
+                        btn.classList.remove('active', 'btn-primary');
+                        btn.classList.add('btn-outline-primary');
+                    });
+                    this.classList.add('active', 'btn-primary');
+                    this.classList.remove('btn-outline-primary');
 
-      .services-section {
-        margin-left: 0;
-        padding-top: 100px;
-      }
-    }
-  </style>
-</head>
-<body>
+                    // Toggle project visibility
+                    portfolioTopics.forEach(topic => {
+                        if (topic.id === targetTopic) {
+                            topic.classList.remove('d-none');
+                        } else {
+                            topic.classList.add('d-none');
+                        }
+                    });
+                });
+            });
 
-  <div class="glow-bg"></div>
+            // === Skills/Tools Toggle Logic ===
+            const skillsBtn = document.getElementById('skills-btn');
+            const toolsBtn = document.getElementById('tools-btn');
+            const skillsContent = document.getElementById('skills-content');
+            const toolsContent = document.getElementById('tools-content');
 
-  <section class="services-section">
-    <h1>My Services</h1>
-    <p>I offer a range of creative and technical services to bring your ideas to life.</p>
+            skillsBtn?.addEventListener('click', () => {
+                skillsBtn.classList.add('active', 'btn-primary');
+                skillsBtn.classList.remove('btn-outline-primary');
+                toolsBtn.classList.remove('active', 'btn-primary');
+                toolsBtn.classList.add('btn-outline-primary');
+                skillsContent.classList.remove('d-none');
+                toolsContent.classList.add('d-none');
+            });
 
-    <div class="services-grid">
-      <div class="service-card">
-        <i class="fas fa-code"></i>
-        <h3>Web Development</h3>
-        <p>Building modern, responsive websites using HTML, CSS, JavaScript, and frameworks.</p>
-        <a href="projects/web-development.html" class="learn-more-btn" target="_blank">Learn More</a>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-paint-brush"></i>
-        <h3>UI/UX Design</h3>
-        <p>Crafting intuitive user interfaces with focus on usability and aesthetics.</p>
-        <a href="Course-app.pdf" class="learn-more-btn" target="_blank">Learn More</a>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-mobile-alt"></i>
-        <h3>Mobile App Design</h3>
-        <p>Designing sleek and functional app interfaces for iOS and Android platforms.</p>
-        <a href="banking-app.pdf" class="learn-more-btn" target="_blank">Learn More</a>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-search"></i>
-        <h3>SEO Optimization</h3>
-        <p>Improving website visibility and search engine rankings with modern strategies.</p>
-        <a href="projects/seo-optimization.html" class="learn-more-btn" target="_blank">Learn More</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
- <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - Mano</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #050d0e;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    /* Glowing Background Animation */
-    .glow-animation {
-      position: fixed;
-      width: 300%;
-      height: 300%;
-      top: -100%;
-      left: -100%;
-      background: radial-gradient(circle at center, #00f2ff33 0%, transparent 80%);
-      animation: rotateGlow 20s linear infinite;
-      z-index: -1;
-      filter: blur(150px);
-    }
-
-    @keyframes rotateGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .contact-section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 50px 20px;
-    }
-
-    .contact-section h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #00f2ff;
-      text-shadow: 0 0 20px #00f2ff99;
-    }
-
-    .contact-section p {
-      max-width: 600px;
-      color: #aaa;
-      text-align: center;
-      margin-bottom: 50px;
-      font-size: 1.1rem;
-    }
-
-    .contact-form {
-      background: #0c1819;
-      border-radius: 16px;
-      padding: 40px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
-      animation: fadeIn 1.2s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 10px;
-      background: #1b2a2b;
-      color: #fff;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: inset 0 0 5px #00f2ff20;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      box-shadow: 0 0 10px #00f2ff;
-    }
-
-    .contact-form button {
-      width: 100%;
-      background: #00f2ff;
-      color: #000;
-      font-weight: bold;
-      font-size: 1.1rem;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .contact-form button:hover {
-      background: #01d8e2;
-    }
-
-    .contact-form button::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.4);
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      transition: width 0.5s ease, height 0.5s ease;
-    }
-
-    .contact-form button:active::after {
-      width: 200%;
-      height: 500%;
-    }
-
-    .social-icons {
-      margin-top: 40px;
-    }
-
-    .social-icons a {
-      color: #00f2ff;
-      margin: 0 15px;
-      font-size: 1.6rem;
-      transition: transform 0.3s ease;
-    }
-
-    .social-icons a:hover {
-      transform: scale(1.2);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="glow-animation"></div>
-
-  <section class="contact-section">
-    <h1>Get in Touch</h1>
-    <p>Feel free to reach out if you'd like to collaborate or just say hi 👋</p>
-
-    <form class="contact-form" action="mailto:youremail@example.com" method="post" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-github"></i></a>
-    </div>
-  </section>
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Typing Animation
-    const typedTextSpan = document.querySelector(".typed-text");
-    const cursorSpan = document.querySelector(".cursor");
-    const textArray = ["Software Developer", " Designer", "Creative Thinker"];
-    const typingDelay = 100;
-    const erasingDelay = 50;
-    const newTextDelay = 1500;
-    let textArrayIndex = 0;
-    let charIndex = 0;
-
-    function type() {
-      if (charIndex < textArray[textArrayIndex].length) {
-        if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
-        typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, typingDelay);
-      } else {
-        cursorSpan.classList.remove("typing");
-        setTimeout(erase, newTextDelay);
-      }
-    }
-
-    function erase() {
-      if (charIndex > 0) {
-        if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
-        typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(erase, erasingDelay);
-      } else {
-        cursorSpan.classList.remove("typing");
-        textArrayIndex++;
-        if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-        setTimeout(type, typingDelay + 500);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      if (textArray.length) setTimeout(type, newTextDelay + 250);
-      document.querySelector(".profile-img").classList.add("animate");
-      document.querySelector(".profile-img-a").classList.add("animate");
-
-      // VANTA HALO EFFECT
- VANTA.HALO({
-  el: "#vanta-hero",
-  mouseControls: true,
-  touchControls: true,
-  gyroControls: false,
-  touchControls: true,
-  baseColor: 0x00f2ff,          // Glow color
-  backgroundColor: 0x071f23,    // Deep teal background (to match your image)
-  size: 1.2,                    // Optional: size of particles
-  amplitudeFactor: 20.0,        // Stronger wave movement
-  xOffset: 0.22,
-  yOffset: 0.09
-})
-
-    });
-  </script>
+            toolsBtn?.addEventListener('click', () => {
+                toolsBtn.classList.add('active', 'btn-primary');
+                toolsBtn.classList.remove('btn-outline-primary');
+                skillsBtn.classList.remove('active', 'btn-primary');
+                skillsBtn.classList.add('btn-outline-primary');
+                toolsContent.classList.remove('d-none');
+                skillsContent.classList.add('d-none');
+            });
+        });
+    </script>
 </body>
 </html>
