@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home - Mano</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #050d0e;
+      color: #fff;
+      overflow-x: hidden;
+    }
+         /* Background Video */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -10;
+      filter: brightness(0.3);
+    }
+
+    .glow-bg {
+      position: fixed;
+      top: -30%;
+      left: -30%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #00f2ff33, transparent 70%);
+      animation: pulse 20s linear infinite;
+      z-index: -1;
+      filter: blur(100px);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      color: #00f2ff;
+      text-shadow: 0 0 20px #00f2ff88;
+      animation: fadeInDown 1s ease;
+    }
+
+    .hero-section h2 {
+      font-size: 1.6rem;
+      color: #aaa;
+      margin-bottom: 40px;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-buttons a {
+      padding: 14px 28px;
+      font-size: 1rem;
+      background: #00f2ff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .hero-buttons a:hover {
+      background: #01d8e2;
+    }
+
+    .hero-buttons a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    .hero-buttons a:active::after {
+      width: 300%;
+      height: 1000%;
+    }
+
+    .social-icons {
+      margin-top: 50px;
+    }
+
+    .social-icons a {
+      color: #00f2ff;
+      font-size: 1.6rem;
+      margin: 0 12px;
+      transition: transform 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg"></div>
+     <!-- Background Video -->
+  <video autoplay muted loop class="video-bg">
+    <source src="bg-video0.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <section class="hero-section">
+    <h1>Hi, I'm Manojkumar</h1>
+    <h2>Software Developer & UI/UX Designer</h2>
+
+    <div class="hero-buttons">
+      <a href="index.html">View Portfolio</a>
+      <a href="contact.html">Contact Me</a>
+    </div>
+
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+    </div>
+  </section>
+
+</body>
+</html>
